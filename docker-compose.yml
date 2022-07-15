@@ -5,12 +5,24 @@ services:
     container_name: rss-reader-telegram-bot-rss-bridge
     volumes:
       - ./rss-bridge/config:/config
+    ports:
+      - 5001:80
     restart: unless-stopped
+  rss-hub:
+    image: diygod/rsshub:latest
+    container_name: rss-reader-telegram-bot-rss-hub
+    ports:
+      - 5002:1200
+    restart: unless-stopped
+    env_file:
+      - ./rss-hub/.env
   mongo-db:
     image: mongo:4.4
     container_name: rss-reader-telegram-bot-mongo-db
     volumes:
       - ./mongo-db/data:/data/db
+    ports:
+      - 5003:27017
     restart: unless-stopped
   telegram-bot:
     image: rss-reader-telegram-bot:latest
