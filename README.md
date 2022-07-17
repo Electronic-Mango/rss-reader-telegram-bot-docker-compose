@@ -90,6 +90,9 @@ git submodule update
 When Docker Compose is run with `--build` flag a new Docker image will be built,
 using Dockerfile in this submodule, so it is important the submodule is up to date.
 
+Both this and the bot source code repositories on GitHub uses workflows to ensure,
+that source code here is always up to date.
+
 
 ## Run the bot
 
