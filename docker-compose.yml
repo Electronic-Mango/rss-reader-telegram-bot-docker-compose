@@ -26,13 +26,13 @@ services:
     restart: unless-stopped
   telegram-bot:
     image: rss-reader-telegram-bot:latest
-    build: ./rss-reader-telegram-bot/source-code/
+    build: ./telegram-bot/source-code/
     container_name: rss-reader-telegram-bot-telegram-bot
     volumes:
-      - ./rss-reader-telegram-bot/config:/config
+      - ./telegram-bot/config:/config
     restart: unless-stopped
     env_file:
-      - ./rss-reader-telegram-bot/.env
+      - ./telegram-bot/.env
     environment:
       - DATABASE_DB_HOST=mongo-db
       - RSS_FEEDS_YAML_FILENAME=/config/custom_feeds.yaml
@@ -41,4 +41,3 @@ networks:
   default:
     name: rss-reader-telegram-bot-network
     driver: bridge
-
