@@ -21,6 +21,7 @@ However, this serves as a nice example of how to deploy more complicated solutio
 
 ### MongoDB
 The DB files will be stored in a mounted volume in `./mongo-db/data` subdirectory.
+This means, that DB data is stored on the host, rather than on the container.
 
 No additional configuration is required.
 

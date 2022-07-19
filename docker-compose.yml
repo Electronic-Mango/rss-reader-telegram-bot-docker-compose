@@ -1,8 +1,20 @@
+# This YAML file will create 4 containers:
+#  - MongoDB
+#  - RSS-Bridge
+#  - RSSHub
+#  - RSS Telegram bot itself
+# and a bridged network connecting them.
+# First 3 will have their used ports mapped to host, but it's used only for debugging.
+# External access through host isn't needed, since bot accesses containers directly.
+# Each container has "unless-stopped" restart policy, so they should start when host reboots.
+# Techincally only bot and MongoDB is needed, however this serves as a nice deployment example.
+
 version: "3.9"
 services:
   rss-bridge:
     image: rssbridge/rss-bridge:latest
     container_name: rss-reader-telegram-bot-rss-bridge
+    # Mapping "/config" allows for passing extra configuration to RSS-Bridge.
     volumes:
       - ./rss-bridge/config:/config
     ports:
@@ -14,11 +26,15 @@ services:
     ports:
       - 5002:1200
     restart: unless-stopped
+    # "./rss-hub/.env" can be used to further configure RSSHub.
     env_file:
       - ./rss-hub/.env
   mongo-db:
+    # Version 4.4 of MongoDB is used, since version 5 caused issues on Raspberry PI.
     image: mongo:4.4
     container_name: rss-reader-telegram-bot-mongo-db
+    # Mounting "/data/db" means, that this MongoDB will actually store its data on host,
+    # rather than on container itself.
     volumes:
       - ./mongo-db/data:/data/db
     ports:
@@ -28,11 +44,21 @@ services:
     image: rss-reader-telegram-bot:latest
     build: ./telegram-bot/source-code/
     container_name: rss-reader-telegram-bot-telegram-bot
+    # Mounted "/config" is used for passing RSS links to the bot.
+    # This way there's no need to rebuild the image when links are changed.
+    # Additionally that's where bot internal logs will be stored, so they are accessible
+    # without getting into the container itself.
     volumes:
       - ./telegram-bot/config:/config
     restart: unless-stopped
     env_file:
+    # "./telegram-bot/.env" file can be used for additional configuration of the bot
+    # without the need of rebuilding the whole image.
       - ./telegram-bot/.env
+    # Some additional common configuration:
+    #  - MongoDB service used as DB host
+    #  - storing feed links configuration file in the mounted volume
+    #  - storing bot internal logs in the mounted volume
     environment:
       - DATABASE_DB_HOST=mongo-db
       - RSS_FEEDS_YAML_FILENAME=/config/custom_feeds.yaml
