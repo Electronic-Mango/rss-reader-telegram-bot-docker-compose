@@ -1,4 +1,4 @@
 [submodule "telegram-bot/source-code"]
 	path = telegram-bot/source-code
-	url = git@github.com:Electronic-Mango/rss-reader-telegram-bot.git
+	url = https://github.com/Electronic-Mango/rss-reader-telegram-bot.git
 	branch = main
