@@ -120,6 +120,7 @@ You can run the bot and all necessary containers in just a few steps:
  1. Clone this repository
  1. Update the bot source code submodule with `git submodule update --init`
  1. Add your Telegram bot token to `./telegram-bot/.env` file
+ 1. Optionally add allowed usernames to `./telegram-bot/.env` file
  1. Add you feeds to `./telegram-bot/config/custom_feeds.yaml`
  1. Optionally add any configuration to either `./rss-bridge/config` or `./rss-hub/.env` if you need it
  1. Run `docker compose up -d --build`
