@@ -26,6 +26,9 @@ This means, that DB data is stored on the host, rather than on the container.
 No additional configuration is required.
 
 ### RSS-Bridge
+RSS-Bridge container can be started with `rss-bridge` Compose profile.
+Without it the container won't be started.
+
 Configuration files are stored in a mounted volume in `./rss-bridge/config` subdirectory.
 
 Currently there's only a basic `config.ini.php`, which configures RSS-Bridge to output its errors
@@ -38,6 +41,9 @@ for reference.
 
 
 ### RSSHub
+RSSHub container can be started with `rss-hub` Compose profile.
+Without it the container won't be started.
+
 There are no configuration changes by default,
 however you can add your own parameters by modifying `./rss-hub/.env` file.
 This file stores all environment variables loaded into the RSSHub container.
@@ -70,6 +76,18 @@ so no additional configuration is required.
 
 When Docker Compose is run with `--build` flag a new Docker image will be built,
 using Dockerfile in git submodule containing bot's source code.
+
+
+### Docker Compose profiles
+In order to start either self-hosted RSS container you have to run Compose with their profiles:
+* `RSS-Bridge` starts with profile `rss-bridge`
+* `RSS-Bridge` starts with profile `rss-hub`
+
+You can start Compose with both profiles if you want to run both solutions.
+Keep in mind that you also need to specify profiles when stopping containers via Compose.
+
+More details about using Compose profiles are available in
+[Using profiles with Compose](https://docs.docker.com/compose/profiles/) Docker documentation page.
 
 
 ## RSS reader Telegram bot source code

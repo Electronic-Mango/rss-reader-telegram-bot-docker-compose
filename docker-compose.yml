@@ -20,6 +20,8 @@ services:
     ports:
       - 5001:80
     restart: unless-stopped
+    profiles:
+      - rss-bridge
   rss-hub:
     image: diygod/rsshub:latest
     container_name: rss-reader-telegram-bot-rss-hub
@@ -29,6 +31,8 @@ services:
     # "./rss-hub/.env" can be used to further configure RSSHub.
     env_file:
       - ./rss-hub/.env
+    profiles:
+      - rss-hub
   mongo-db:
     # Version 4.4 of MongoDB is used, since version 5 caused issues on Raspberry PI.
     image: mongo:4.4
