@@ -11,6 +11,9 @@
 
 version: "3.9"
 
+x-service-defaults: &service-defaults
+  restart: unless-stopped
+
 x-volume-timezone: &volume-timezone
   /etc/timezone:/etc/timezone:ro
 
@@ -19,6 +22,7 @@ x-volume-localtime: &volume-localtime
 
 services:
   rss-bridge:
+    << : *service-defaults
     image: rssbridge/rss-bridge:latest
     container_name: rss-reader-telegram-bot-rss-bridge
     # Mapping "/config" allows for passing extra configuration to RSS-Bridge.
@@ -28,10 +32,10 @@ services:
       - *volume-localtime
     ports:
       - 5001:80
-    restart: unless-stopped
     profiles:
       - rss-bridge
   rss-hub:
+    << : *service-defaults
     image: diygod/rsshub:latest
     container_name: rss-reader-telegram-bot-rss-hub
     volumes:
@@ -39,13 +43,13 @@ services:
       - *volume-localtime
     ports:
       - 5002:1200
-    restart: unless-stopped
     # "./rss-hub/.env" can be used to further configure RSSHub.
     env_file:
       - ./rss-hub/.env
     profiles:
       - rss-hub
   mongo-db:
+    << : *service-defaults
     # Version 4.4 of MongoDB is used, since version 5 caused issues on Raspberry PI.
     image: mongo:4.4
     container_name: rss-reader-telegram-bot-mongo-db
@@ -57,8 +61,8 @@ services:
       - *volume-localtime
     ports:
       - 5003:27017
-    restart: unless-stopped
   telegram-bot:
+    << : *service-defaults
     image: rss-reader-telegram-bot:latest
     build: ./telegram-bot/source-code/
     container_name: rss-reader-telegram-bot-telegram-bot
@@ -70,7 +74,6 @@ services:
       - ./telegram-bot/config:/config
       - *volume-timezone
       - *volume-localtime
-    restart: unless-stopped
     # "./telegram-bot/.env" file can be used for additional configuration of the bot
     # without the need of rebuilding the whole image.
     env_file:
