@@ -84,7 +84,7 @@ services:
     #  - storing bot internal logs in the mounted volume
     environment:
       - DATABASE_DB_HOST=mongo-db
-      - RSS_FEEDS_YAML_FILENAME=/config/custom_feeds.yaml
+      - RSS_FEEDS_YAML_FILENAME=/config/custom_feeds.yml
       - LOGGING_LOG_PATH=/config/bot.log
 
 networks:
