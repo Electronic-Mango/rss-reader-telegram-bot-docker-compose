@@ -82,10 +82,12 @@ services:
     #  - MongoDB service used as DB host
     #  - storing feed links configuration file in the mounted volume
     #  - storing bot internal logs in the mounted volume
+    #  - storing bot persistence data in the mounted volume
     environment:
       - DATABASE_DB_HOST=mongo-db
       - RSS_FEEDS_YAML_FILENAME=/config/custom_feeds.yml
       - LOGGING_LOG_PATH=/config/bot.log
+      - TELEGRAM_PERSISTENCE_FILE=/config/persistence
 
 networks:
   default:
