@@ -4,5 +4,5 @@
 # For RSS-Bridge I recommend using Mrss format, since it seems that parsing it grants more details.
 # Notice {source_pattern} substring, it will be replaced with whatever source you input when
 # adding a subscription.
-RSS-Bridge feed type: "http://rss-bridge:80/some/rss/bridge/url/{source_pattern}&format=Mrss"
-RSSHub feed type: "http://rss-hub:1200/some/rss/hub/url/{source_pattern}"
+RSS-Bridge feed type: http://rss-bridge:80/some/rss/bridge/url/{source_pattern}&format=Mrss
+RSSHub feed type: http://rss-hub:1200/some/rss/hub/url/{source_pattern}
