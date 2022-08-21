@@ -51,15 +51,15 @@ This file stores all environment variables loaded into the RSSHub container.
 
 ### RSS reader Telegram bot
 The bot itself requires some configuration to work correctly:
- - `./telegram-bot/.env` should be updated with Telegram bot token
+ - `./telegram-bot/config/custom_settings.yml` should be updated with Telegram bot token
  - `./telegram-bot/config/custom_feeds.yml` should be updated with your feed links
 
 When using one of the self-hosting solutions keep in mind that you should use service name
 instead of IP address. In this case it will be either `rss-bridge` or `rss-hub`.
 Port still has to be provided.
 
-You can use the `./telegram-bot/.env` for any additional configuration of the bot,
-since it just loads environment variables into the container.
+You can use the `./telegram-bot/config/custom_settings.yml` for any additional configuration of the bot.
+`docker-compose.yml` adds this file to the container as a mounted volume and sets its path via `CUSTOM_SETTINGS_PATH` environment variable.
 You can check out the [RSS reader Telegram bot](https://github.com/Electronic-Mango/rss-reader-telegram-bot)
 repository for more details.
 This way you can change bot's configuration without the need of modifying the source code
@@ -119,8 +119,8 @@ You can run the bot and all necessary containers in just a few steps:
 
  1. Clone this repository
  1. Update the bot source code submodule with `git submodule update --init`
- 1. Add your Telegram bot token to `./telegram-bot/.env` file
- 1. Optionally add allowed usernames to `./telegram-bot/.env` file
+ 1. Add your Telegram bot token to `./telegram-bot/config/custom_settings.yml` file
+ 1. Optionally add allowed usernames to `./telegram-bot/config/custom_settings.yml` file
  1. Add you feeds to `./telegram-bot/config/custom_feeds.yml`
  1. Optionally add any configuration to either `./rss-bridge/config` or `./rss-hub/.env` if you need it
  1. Run `docker compose up -d --build`

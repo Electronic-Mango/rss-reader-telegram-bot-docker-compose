@@ -1,0 +1,15 @@
+telegram:
+  # Fill with your bot's token
+  token:
+  # Fill with your Telegram username, or leave empty for public access
+  allowed_usernames: []
+  persistence_file: /config/persistence
+
+logging:
+  log_path: /config/bot.log
+
+database:
+  host: mongo-db
+
+rss:
+  feeds_yaml_filename: /config/custom_feeds.yml

@@ -74,20 +74,11 @@ services:
       - ./telegram-bot/config:/config
       - *volume-timezone
       - *volume-localtime
-    # "./telegram-bot/.env" file can be used for additional configuration of the bot
-    # without the need of rebuilding the whole image.
-    env_file:
-      - ./telegram-bot/.env
-    # Some additional common configuration:
-    #  - MongoDB service used as DB host
-    #  - storing feed links configuration file in the mounted volume
-    #  - storing bot internal logs in the mounted volume
-    #  - storing bot persistence data in the mounted volume
+    # Pointing the custom YAML configuration file to mounted volume.
+    # "telegram-bot/config/custom_settings.yml" can be used for further customization
+    # of the bot parameters without the need of rebuilding the whole image.
     environment:
-      - DATABASE_DB_HOST=mongo-db
-      - RSS_FEEDS_YAML_FILENAME=/config/custom_feeds.yml
-      - LOGGING_LOG_PATH=/config/bot.log
-      - TELEGRAM_PERSISTENCE_FILE=/config/persistence
+      - CUSTOM_SETTINGS_PATH=/config/custom_settings.yml
 
 networks:
   default:
