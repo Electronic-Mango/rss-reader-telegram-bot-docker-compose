@@ -2,7 +2,8 @@
 # When using RSS-Bridge and RSSHub use their service names, rather than IP.
 # Also use their default ports, rather than mapped one, since container is accessed directly.
 # For RSS-Bridge I recommend using Mrss format, since it seems that parsing it grants more details.
-# Notice {source_pattern} substring, it will be replaced with whatever source you input when
-# adding a subscription.
-RSS-Bridge feed type: http://rss-bridge:80/some/rss/bridge/url/{source_pattern}&format=Mrss
-RSSHub feed type: http://rss-hub:1200/some/rss/hub/url/{source_pattern}
+# You can check main bot repo for more details regaring this file.
+RSS-Bridge feed type:
+  url: http://rss-bridge:80/some/rss/bridge/url/{source_pattern}&format=Mrss
+RSSHub feed type:
+  url: http://rss-hub:1200/some/rss/hub/url/{source_pattern}
