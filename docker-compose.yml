@@ -13,6 +13,10 @@ version: "3.9"
 
 x-service-defaults: &service-defaults
   restart: unless-stopped
+  logging:
+    driver: "json-file"
+    options:
+      max-size: "100m"
 
 x-volume-timezone: &volume-timezone
   /etc/timezone:/etc/timezone:ro
