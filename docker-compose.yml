@@ -9,8 +9,6 @@
 # Each container has "unless-stopped" restart policy, so they should start when host reboots.
 # Techincally only bot and MongoDB is needed, however this serves as a nice deployment example.
 
-version: "3.9"
-
 x-service-defaults: &service-defaults
   restart: unless-stopped
   logging:
