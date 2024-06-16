@@ -2,3 +2,6 @@
 
 [error]
 output = "http"
+
+[system]
+enabled_bridges[] = *
