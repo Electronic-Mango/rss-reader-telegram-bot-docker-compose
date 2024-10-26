@@ -32,6 +32,7 @@ services:
       - 5001:80
     profiles:
       - rss-bridge
+
   rss-hub:
     << : *service-defaults
     image: diygod/rsshub:latest
@@ -46,6 +47,7 @@ services:
       - ./rss-hub/.env
     profiles:
       - rss-hub
+
   mongo-db:
     << : *service-defaults
     image: mongo
