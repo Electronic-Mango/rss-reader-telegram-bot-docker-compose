@@ -48,8 +48,7 @@ services:
       - rss-hub
   mongo-db:
     << : *service-defaults
-    # Version 4.4 of MongoDB is used, since version 5 caused issues on Raspberry PI.
-    image: mongo:4.4.18
+    image: mongo
     container_name: rss-reader-telegram-bot-mongo-db
     # Mounting "/data/db" means, that this MongoDB will actually store its data on host,
     # rather than on container itself.
