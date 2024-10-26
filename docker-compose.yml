@@ -22,7 +22,7 @@ services:
   rss-bridge:
     << : *service-defaults
     image: rssbridge/rss-bridge:latest
-    container_name: rss-reader-telegram-bot-rss-bridge
+    container_name: rss-reader-rss-bridge
     # Mapping "/config" allows for passing extra configuration to RSS-Bridge.
     volumes:
       - ./rss-bridge/config:/config
@@ -36,7 +36,7 @@ services:
   rss-hub:
     << : *service-defaults
     image: diygod/rsshub:latest
-    container_name: rss-reader-telegram-bot-rss-hub
+    container_name: rss-reader-rss-hub
     volumes:
       - *volume-timezone
       - *volume-localtime
@@ -51,7 +51,7 @@ services:
   mongo-db:
     << : *service-defaults
     image: mongo
-    container_name: rss-reader-telegram-bot-mongo-db
+    container_name: rss-reader-mongo-db
     # Mounting "/data/db" means, that this MongoDB will actually store its data on host,
     # rather than on container itself.
     volumes:
@@ -64,7 +64,7 @@ services:
     << : *service-defaults
     image: rss-reader-telegram-bot:latest
     build: ./telegram-bot/source-code/
-    container_name: rss-reader-telegram-bot-telegram-bot
+    container_name: rss-reader-telegram-bot
     # Mounted "/config" is used for passing RSS links to the bot.
     # This way there's no need to rebuild the image when links are changed.
     # Additionally that's where bot internal logs will be stored, so they are accessible
@@ -81,5 +81,5 @@ services:
 
 networks:
   default:
-    name: rss-reader-telegram-bot-network
+    name: rss-reader-network
     driver: bridge
